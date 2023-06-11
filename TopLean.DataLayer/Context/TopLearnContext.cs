@@ -28,6 +28,7 @@ namespace TopLearn.DataLayer.Context
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserDiscount> UserDiscount { get; set; }
         // edite comment
+        // for push git
 
         #endregion
 
