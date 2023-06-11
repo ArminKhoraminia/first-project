@@ -1,0 +1,18 @@
+﻿@{
+    var Amount = Context.Request.Query["Amount"];
+    ViewData["title"] = "تایید پرداخت";
+    ViewData["NameOfPage"] = "تایید پرداخت";
+}
+
+<partial name="_TopOfPages" />
+
+<div class="alert alert-success" style="direction : rtl ; padding: 20px">
+    <h3>@User.Identity.Name عزیز !</h3>
+    <hr />
+    <p>مبلغ @Amount تومان به موجودی کیف پول شما اضافه گردید</p>
+    <p>از پرداخت شما سپاسگزاریم</p>
+    <p>می توانید با استفاده از لینک زیر به پنل کاربری خود منتقل شوید</p>
+    <p> 
+        <a href="/UserPanel">پنل کاربری</a>
+    </p>
+</div>

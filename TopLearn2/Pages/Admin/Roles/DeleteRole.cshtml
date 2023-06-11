@@ -1,0 +1,46 @@
+﻿@page "{id}"
+@model TopLearn2.Web.Pages.Admin.Roles.DeleteRoleModel
+@{
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">حذف نقش جدید</h1>
+    </div>
+</div>
+
+<div class="row">
+    <form method="post">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    نقش
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>عنوان نقش</label>
+                        <input type="hidden" asp-for="Role.RoleId" class="form-control">
+                        <input type="hidden" asp-for="Role.RoleTitle" class="form-control">
+
+                        <label>شرح نقش : @Model.Role.RoleTitle</label>
+
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                    <input type="submit" value="حذف اطلاعات" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    دسترسی های نقش
+                </div>
+                <div class="panel-body">
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>

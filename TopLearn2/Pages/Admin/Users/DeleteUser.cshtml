@@ -1,0 +1,72 @@
+﻿@page "{id}"
+@using TopLearn.Core.Convertors;
+@model TopLearn2.Web.Pages.Admin.Users.DeleteUserModel
+@{
+    string srtActive = "";
+    if (Model.DeleteUserForAdmin.IsActive)
+    {
+        srtActive = "فعال";
+    }
+    else
+    {
+        srtActive = "غیر فعال";
+    }
+}
+
+<div class="row">
+    <form method="post">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    اطلاعات کاربر
+                </div>
+
+                <input type="hidden" asp-for="DeleteUserForAdmin.UserId" />
+
+                <div class="container">
+                    <div class="user-account">
+                        <div class="account-information">
+                            <div class="row">
+                                <section class="user-account-content">
+
+                                    <ul>
+                                        <li>
+                                            <i class="zmdi zmdi-assignment-account"></i> نام کاربری :  @Model.DeleteUserForAdmin.UserName
+                                        </li>
+                                        <li>
+                                            <i class="zmdi zmdi-email"></i> ایمیل : @Model.DeleteUserForAdmin.Email
+                                        </li>
+                                        <li>
+                                            <i class="zmdi zmdi-email"></i> ایمیل : @srtActive
+                                        </li>
+                                        <li>
+                                            <i class="zmdi zmdi-calendar-check"></i> @Model.DeleteUserForAdmin.RegisterDate.DateToShamsi()
+                                        </li>
+                                        <li>
+                                            <i class="zmdi zmdi-balance-wallet"></i> @Model.DeleteUserForAdmin.Wallet.ToString("#,0") تومان
+                                        </li>
+                                        <hr />
+                                        <input type="submit" value="حذف کاربر" class="btn btn-danger" />
+                                    </ul>
+
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    تصویر پروفایل
+                </div>
+                <div class="panel-body">
+                    <img id="imgAvatar" class="thumbnail" src="/images/UserAvatar/@Model.DeleteUserForAdmin.UserAvatar" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

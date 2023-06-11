@@ -1,0 +1,25 @@
+﻿@model Tuple<int,int>
+@{
+    Layout = null;
+    int Like = Model.Item1;
+    int DisLike = Model.Item2;
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="row thumbnail">
+        <div class="alert alert-info col-md-7" style="margin:0px">
+            <p>برای بهتر شدن کیفیت دوره ها لطفا با نظرات خود ما را راهنمایی کنید</p>
+        </div>
+        <div class="col-md-5">
+            <p></p>
+            <p>
+                <a class="btn btn-success" onclick="CreateVote(true)">
+                    می پسندم (@Like)
+                </a>
+                <a class="btn btn-danger" onclick="CreateVote(false)">
+                    نمی پسندم (@DisLike)
+                </a>
+            </p>
+        </div>
+    </div>
+}
