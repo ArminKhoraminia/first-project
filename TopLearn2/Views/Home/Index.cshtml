@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["title"] = "صفحه اصلی";
+}
+@section SearchBar {
+    <header>
+        <a href="" class="logo"><img src="~/images/logo.png"></a>
+        <h1> با اساتید مجرب و کارآزموده در خودآموز تاپ لرن </h1>
+        <h2> آموزش ببینید ، تجربه کسب کنید و بازار کار شوید </h2>
+        <h3> با کمترین هزینه خودت یاد بگیر </h3>
+    </header>
+    <div class="search-form">
+        <form action="/api/CourseApi" method="get">
+            <input type="text" name="filter" id="SearchBar" placeholder="چی دوست داری یاد بگیری ؟">
+            <button><i class="zmdi zmdi-search"></i></button>
+        </form>
+    </div>
+}
+<main id="home-page">
+    <div class="container">
+        <section class="terms-items">
+            <header>
+                <h2> آخرین دوره های تاپ لرن </h2>
+            </header>
+            <hr>
+            <div class="row">
+                <cache expires-after="@TimeSpan.FromMinutes(15)">
+                    @await Component.InvokeAsync("LastCoursesComponent")
+                </cache>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="terms-items">
+            <header>
+                <h2> دوره های محبوب تاپ لرن </h2>
+            </header>
+            <hr>
+            <div class="row">
+                <cache expires-after="@TimeSpan.FromHours(1)">
+                    @await Component.InvokeAsync("PopularCourseComponent")
+                </cache>
+            </div>
+            <hr>
+        </section>
+    </div>
+</main>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function(){
+            $("#SearchBar").autocomplete({
+                source: 'api/Courseapi/SearchBar'
+            })
+        });
+    </script>
+}

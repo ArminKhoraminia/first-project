@@ -1,0 +1,107 @@
+﻿@using TopLearn.Core.DTOs;
+@model TopLearn.Core.DTOs.GetWalletDataViewModel
+@{
+    ViewData["title"] = "کیف پول";
+    ViewData["NameOfPage"] = "کیف پول / " + User.Identity.Name;
+    int currentAmount = ViewBag.currentAmount;
+}
+
+<partial name="_TopOfPages" />
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+
+                <partial name="SideBarUserPanel" />
+
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header><h1> کیف پول </h1></header>
+                        <div class="inner form-layer">
+                            <form asp-action="Wallet" method="post">
+                                <div class="row">
+
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <i class="zmdi zmdi-balance-wallet"></i> @currentAmount.ToString("#,0") تومان
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="AddAmount"><i class="zmdi zmdi-balance-wallet"></i></span>
+                                            <input type="number" asp-for="Amount" class="form-control" placeholder="مبلغ به تومان">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button class="btn btn-success"> افزایش موجودی </button>
+                                    </div>
+
+
+                                    <div class="text-danger " asp-validation-summary="All">
+                                    </div>
+
+
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <hr />
+
+                        <table class="table table-bordered">
+                            <tr class="text-center" style="text-align:center">
+                                <th>مبلغ</th>
+                                <th>توضیحات</th>
+                                <th>نوع تراکنش</th>
+                                <th>تاریخ</th>
+                                <th>تایید</th>
+
+                            </tr>
+                            @{
+                                List<GetAllWalletUserViewModel> arrayWallet = ViewBag.AllWallet;
+                                foreach (var item in arrayWallet)
+                                {
+                                    <tr>
+                                        <td>@item.Amount.ToString("#,0")</td>
+                                        <td>
+                                            @{
+                                                string tagHref = "<a href='/UserPanel/ShowOrder/" + item.Description.Replace("خرید دوره با شماره فاکتور :", "") + "' >خرید دوره با شماره فاکتور :</a>";
+                                            }
+                                            @Html.Raw(item.Description.Replace("خرید دوره با شماره فاکتور :", tagHref))
+
+                                        </td>
+
+                                        @if (item.TypeId == 1)
+                                        {
+                                            <td class="text-success">شارژ کیف پول</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-danger">برداشت کیف پول</td>
+                                        }
+
+                                        <td>@item.DateTime.DateToShamsi()</td>
+
+                                        @if (item.IsPayed == true)
+                                        {
+                                            <td class="text-success">تایید شده</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-danger">تایید نشده</td>
+                                        }
+                                    </tr>
+                                }
+                            }
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

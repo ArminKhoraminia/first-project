@@ -1,0 +1,58 @@
+﻿@using TopLearn.Core.Convertors
+@using TopLearn.DataLayer.Entities.Course
+@using TopLearn.Core.Services.Interfaces
+@model Tuple<List<TopLearn.DataLayer.Entities.Question.Answer>,int>
+@inject IUserService _userService
+
+@{
+    Layout = null;
+    var userid = _userService.GetIdByUserName(User.Identity.Name);
+    var QuestionUserId = Model.Item2;
+}
+<style>
+    .IsTrueAnswer {
+        border: 2px solid #00b3e9 !important;
+    }
+</style>
+
+@if (Model.Item1 != null && Model.Item1.Any())
+{
+    @foreach (var answer in Model.Item1)
+    {
+        <div class="panel @((answer.SelectedAnswer)?"IsTrueAnswer":"")">
+            <div class="panel-heading">
+                <img src="/images/UserAvatar/@answer.User.UserAvatar" style="max-width: 40px; border-radius: 20px;" />
+                @answer.User.UserName | @answer.CreateDate.DateToShamsi()
+            </div>
+            <div class="panel-body">
+                @Html.Raw(answer.Body)
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (answer.SelectedAnswer == false && QuestionUserId == userid)
+                    {
+                        <p>
+                            <form typeof="POST">
+                                <a class="btn btn-success pull-left"
+                   asp-action="SelectIsTrueAnswer"
+                   asp-route-answerId="@answer.AnswerId"
+                   asp-route-questionId="@answer.QuestionId">
+                                    پاسخ صحیح
+                                </a>
+                            </form>
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <a class="pull-left">
+                                پاسخ صحیح
+                                <img src="/images/green-check.jpg" style="max-width: 40px" />
+                            </a>
+                        </p>
+                    }
+                }
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["title"] = "فعالسازی حساب کاربری";
+    ViewData["NameOfPage"] = "فعالسازی حساب کاربری";
+}
+
+<partial name="_TopOfPages" />
+
+@if (ViewBag.SuccesActivation)
+{
+   <div class="alert alert-success">
+        <p>حساب کاربری شما با موفقیت فعال شد</p>
+        <p>
+            <a href="/Login">ورود به سایت</a>
+        </p>
+   </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <p>فعالسازی حساب کاربری شما با مشکل مواجه شد</p>
+    </div>
+}

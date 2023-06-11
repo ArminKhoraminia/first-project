@@ -1,0 +1,80 @@
+﻿@page "{courseId}"
+@model TopLearn2.Web.Pages.Admin.Courses.CreateEpisodeModel
+@{
+    ViewData["Title"] = "بخش جدید";
+}
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>ایجاد اطلاعات بخش</h2>
+        </div>
+        <hr />
+        <div class="panel-body">
+            <form method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="CourseEpisode.CourseId" />
+
+                <div class="col-md-12 row">
+                    <div class="form-group col-md-8 input-group">
+                        <label class="input-group-addon"> عنوان بخش : </label>
+                        <input type="text" asp-for="CourseEpisode.EpisodeTitle" class="form-control">
+                        <span asp-validation-for="CourseEpisode.EpisodeTitle"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 row">
+                    <div class="form-group col-md-2 input-group">
+                        <label class="input-group-addon"> زمان بخش : </label>
+                        <input type="text" asp-for="CourseEpisode.EpisodeTime" class="form-control">
+                        <span asp-validation-for="CourseEpisode.EpisodeTime"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 row">
+                    <div class="form-group col-md-4 input-group">
+                        <label class="input-group-addon"> فایل بخش : </label>
+                        <input type="file" name="fileEpisode">
+                        <span asp-validation-for="CourseEpisode.EpisodeFileName"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <p class="text-danger">فایل اجباری است</p>
+                        @if (ViewData["IsExistFile"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                نام فایل معتبر نیست ، لطفا تغییر دهید
+                            </div>
+                        }
+                        @if (ViewData["FileIsEmpty"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                فایل مورد نظر نمیتواند خالی باشد 
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-md-12 row">
+                    <div class="form-group col-md-3 input-group">
+                        <label class="input-group-addon"> دسترسی  :   </label>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" asp-for="CourseEpisode.IsFree">
+                                رایگان است
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 row">
+                    <div class="form-group col-md-3">
+                        <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+

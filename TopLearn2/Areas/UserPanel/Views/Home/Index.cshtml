@@ -1,0 +1,33 @@
+﻿@model TopLearn.Core.DTOs.DetailUsePanelViewModel
+@{
+    ViewData["title"] = "پنل کاربری";
+    ViewData["NameOfPage"] = "پنل کاربری / " + User.Identity.Name;
+}
+
+<partial name="_TopOfPages" />
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+                <partial name="SideBarUserPanel" />
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header><h1> داشبورد </h1></header>
+                        <div class="inner">
+                            <div class="account-information">
+                                <h3> اطلاعات کاربری </h3>
+                                <ul>
+                                    <li> <i class="zmdi zmdi-assignment-account"></i> نام کاربری :  @Model.UserName </li>
+                                    <li> <i class="zmdi zmdi-email"></i> ایمیل : @Model.Email </li>
+                                    <li> <i class="zmdi zmdi-calendar-check"></i> @Model.RegisterDate.DateToShamsi() </li>
+                                    <li> <i class="zmdi zmdi-balance-wallet"></i> @Model.PriceOfWallet.ToString("#,0") تومان </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,58 @@
+﻿@model TopLearn.Core.DTOs.EditeUserPanelViewModel
+@{
+    ViewData["title"] = "پنل کاربری";
+    ViewData["NameOfPage"] = "پنل کاربری / " + User.Identity.Name;
+}
+
+<partial name="_TopOfPages" />
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+
+                <partial name="SideBarUserPanel" />
+
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header><h1> ویرایش حساب کاربری </h1></header>
+                        <div class="inner form-layer">
+                            <form asp-action="EditeUserPanel" method="post" enctype="multipart/form-data">
+                                <input type="hidden" asp-for="OldUserAvatar" />
+                                <div class="row">
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="username"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" asp-for="UserName" placeholder="نام کاربری" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-email"></i></span>
+                                            <input type="text" class="form-control" asp-for="Email" placeholder="ایمیل" aria-describedby="email-address">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <p class="text-info"> آواتار</p>
+                                            <input type="file" asp-for="UserAvatar" />
+                                            <p> عکس خود را از این قسمت می توانید عوض کنید</p>
+                                            <img class="thumbnail " src="~/images/UserAvatar/@Model.OldUserAvatar" style="width:200px "/>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-danger " asp-validation-summary="All">
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button class="btn btn-success"> ویرایش اطلاعات </button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
